@@ -1,4 +1,3 @@
-
 # Physiotherapy Clinic Website
 
 A full-stack clinic website: a classic green-and-white landing page, an
@@ -72,7 +71,7 @@ separate frontend hosting needed.
 mysql -u root -p -e "CREATE DATABASE physio_clinic;"
 
 # 2. Set environment variables (or edit application.properties directly for local testing)
-export DB_URL="jdbc:mysql://localhost:3306/physio_clinic?useSSL=false&serverTimezone=UTC"
+export SPRING_DATASOURCE_URL="jdbc:mysql://localhost:3306/physio_clinic?useSSL=false&serverTimezone=UTC"
 export DB_USERNAME=root
 export DB_PASSWORD=yourMySQLPassword
 export ADMIN_KEY=myOwnSecretKey123
@@ -127,7 +126,7 @@ jdbc:mysql://<HOST>:<PORT>/<DATABASE>?useSSL=true&serverTimezone=UTC&allowPublic
 
    | Key | Value |
    |---|---|
-   | `DB_URL` | your online MySQL JDBC URL (see section 4) |
+   | `SPRING_DATASOURCE_URL` | your online MySQL JDBC URL (see section 4) |
    | `DB_USERNAME` | your database username |
    | `DB_PASSWORD` | your database password |
    | `ADMIN_KEY` | a strong secret only you and your father know |
