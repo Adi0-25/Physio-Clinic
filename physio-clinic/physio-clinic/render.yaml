@@ -1,0 +1,30 @@
+# Render Blueprint — Dr. Sanjit Kumar Physiotherapy Clinic
+#
+# You can either:
+#   (a) Deploy manually via the Render dashboard (recommended for beginners,
+#       see README.md), or
+#   (b) Commit this file to your repo root and use "New + > Blueprint" on
+#       Render to deploy everything from this file automatically.
+#
+# NOTE: Render's free/managed MySQL is limited — most people pair this app
+# with an external MySQL host (Aiven, Railway, Clever Cloud, or a small VPS).
+# Set DB_URL / DB_USERNAME / DB_PASSWORD to that external database below.
+
+services:
+  - type: web
+    name: dr-sanjit-physio-clinic
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: DB_URL
+        sync: false        # set manually in Render dashboard: jdbc:mysql://HOST:3306/physio_clinic?useSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: ADMIN_KEY
+        sync: false        # a strong secret key only you know, used for /admin/dashboard.html
+      - key: DDL_AUTO
+        value: update

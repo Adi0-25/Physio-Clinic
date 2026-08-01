@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr. Sanjit Kumar Physiotherapy Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">&#9877;</span>
+      <span>Dr. Sanjit Kumar <em>Physiotherapy Clinic</em></span>
+    </a>
+    <nav class="site-nav">
+      <a href="#about">About</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#conditions">Conditions We Treat</a>
+      <a href="#book">Book Consultation</a>
+      <a href="#fees">Pay Fees</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about-section">
+    <div class="section-inner about-grid">
+      <div>
+        <p class="eyebrow">About the Clinic</p>
+        <h2>Careful hands. Clear plans. Real recovery.</h2>
+        <p>
+          Dr. Sanjit Kumar Physiotherapy Clinic is a dedicated musculoskeletal and
+          neuro-rehabilitation practice. Every patient begins with a thorough
+          assessment so treatment is built around their specific condition, not a
+          one-size-fits-all routine. We treat back and neck pain, sports injuries,
+          post-surgical recovery, arthritis, and neurological conditions such as
+          stroke and paralysis.
+        </p>
+        <ul class="about-points">
+          <li>10+ years of clinical physiotherapy experience</li>
+          <li>Individualised treatment &amp; recovery timelines</li>
+          <li>Modern electrotherapy &amp; manual therapy equipment</li>
+          <li>Home-visit rehabilitation available on request</li>
+        </ul>
+      </div>
+      <div class="about-card">
+        <h3>Dr. Sanjit Kumar</h3>
+        <p class="about-card-role">M.P.T (Orthopedics), Registered Physiotherapist</p>
+        <hr/>
+        <p><strong>Clinic Hours</strong><br/>Mon – Sat: 9:00 AM – 8:00 PM<br/>Sunday: By appointment only</p>
+        <p><strong>Address</strong><br/>Shop No. 4, Green Valley Complex,<br/>Near City Hospital Road, Ranchi, Jharkhand – 834001</p>
+        <p><strong>Phone</strong><br/>+91 98XXX-XXXXX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section id="facilities" class="section facilities-section">
+    <div class="section-inner">
+      <p class="eyebrow">What We Offer</p>
+      <h2>Facilities &amp; Treatment Methods</h2>
+      <div class="facility-grid">
+        <div class="facility-card">
+          <span class="facility-icon">&#10052;</span>
+          <h3>Manual Therapy</h3>
+          <p>Hands-on joint mobilization, soft tissue release, and myofascial techniques.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#9889;</span>
+          <h3>Electrotherapy</h3>
+          <p>IFT, TENS, and ultrasound therapy for pain relief and faster tissue healing.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#127939;</span>
+          <h3>Exercise &amp; Rehab Therapy</h3>
+          <p>Guided strengthening, mobility, and balance programs tailored to each patient.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#128279;</span>
+          <h3>Cervical &amp; Lumbar Traction</h3>
+          <p>Mechanical traction for disc-related neck and lower back conditions.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#127973;</span>
+          <h3>Post-Surgery Rehabilitation</h3>
+          <p>Structured recovery plans after joint replacement, ligament, or fracture surgery.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#129504;</span>
+          <h3>Neuro Rehabilitation</h3>
+          <p>Stroke and paralysis recovery therapy, including gait and balance retraining.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#127947;</span>
+          <h3>Sports Injury Care</h3>
+          <p>Sport-specific rehab and return-to-play conditioning for athletes.</p>
+        </div>
+        <div class="facility-card">
+          <span class="facility-icon">&#127968;</span>
+          <h3>Home Visit Therapy</h3>
+          <p>Physiotherapy sessions at home for patients unable to travel to the clinic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDITIONS -->
+  <section id="conditions" class="section conditions-section">
+    <div class="section-inner">
+      <p class="eyebrow">Choose a Condition</p>
+      <h2>Conditions We Treat &amp; Typical Recovery Time</h2>
+      <p class="section-note">Select a condition to see the treatment approach, estimated recovery period, and fees. Recovery time varies by severity and patient response.</p>
+
+      <div id="conditionList" class="condition-grid">
+        <p class="loading-text">Loading conditions…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDITION DETAIL MODAL -->
+  <div id="conditionModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <p class="eyebrow" id="modalSeverity">Severity</p>
+      <h3 id="modalName">Condition Name</h3>
+      <p id="modalDescription"></p>
+      <h4>Treatment Approach</h4>
+      <p id="modalTreatment"></p>
+      <div class="modal-stats">
+        <div><span id="modalDays"></span><label>Typical Recovery</label></div>
+        <div><span id="modalSessions"></span><label>Sessions / Week</label></div>
+        <div><span id="modalFee"></span><label>Consultation Fee</label></div>
+        <div><span id="modalSessionFee"></span><label>Per Session</label></div>
+      </div>
+      <button class="btn btn-primary" id="modalBookBtn">Book Consultation for This Condition</button>
+    </div>
+  </div>
+
+  <!-- BOOK CONSULTATION -->
+  <section id="book" class="section book-section">
+    <div class="section-inner form-grid">
+      <div>
+        <p class="eyebrow">Get Started</p>
+        <h2>Book a Consultation</h2>
+        <p>Fill in your details and preferred time. Our clinic team will call to confirm your appointment slot.</p>
+        <div id="bookSuccess" class="form-success hidden">Thank you! Your appointment request has been received. We will call you shortly to confirm.</div>
+      </div>
+      <form id="bookingForm" class="clinic-form">
+        <div class="form-row">
+          <label>Full Name *</label>
+          <input type="text" name="patientName" required />
+        </div>
+        <div class="form-row form-row-split">
+          <div>
+            <label>Phone Number *</label>
+            <input type="tel" name="phoneNumber" required pattern="[0-9]{10}" placeholder="10-digit number" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" />
+          </div>
+        </div>
+        <div class="form-row form-row-split">
+          <div>
+            <label>Age</label>
+            <input type="text" name="age" />
+          </div>
+          <div>
+            <label>Gender</label>
+            <select name="gender">
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row form-row-split">
+          <div>
+            <label>Preferred Date</label>
+            <input type="date" name="preferredDate" />
+          </div>
+          <div>
+            <label>Preferred Time</label>
+            <select name="preferredTime">
+              <option value="">Select</option>
+              <option>Morning (9 AM – 12 PM)</option>
+              <option>Afternoon (12 PM – 4 PM)</option>
+              <option>Evening (4 PM – 8 PM)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Condition / Concern</label>
+          <input type="text" name="relatedCondition" id="relatedConditionInput" placeholder="e.g. Lower Back Pain" />
+        </div>
+        <div class="form-row">
+          <label>Additional Message</label>
+          <textarea name="message" rows="3" placeholder="Briefly describe your symptoms (optional)"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Request Appointment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FEES / PAYMENT -->
+  <section id="fees" class="section fees-section">
+    <div class="section-inner form-grid">
+      <div>
+        <p class="eyebrow">Consultation &amp; Treatment Fees</p>
+        <h2>Pay Your Fees Online</h2>
+        <table class="fees-table">
+          <thead><tr><th>Service</th><th>Fee</th></tr></thead>
+          <tbody>
+            <tr><td>Initial Consultation</td><td>₹500</td></tr>
+            <tr><td>Follow-up Consultation</td><td>₹300</td></tr>
+            <tr><td>Standard Therapy Session</td><td>₹350 – ₹500</td></tr>
+            <tr><td>Home Visit Session</td><td>₹700</td></tr>
+          </tbody>
+        </table>
+        <p class="fees-note">Exact fees depend on the condition and treatment plan discussed during consultation. This records your payment for our clinic records; for large or first-time payments, please also confirm with our front desk.</p>
+        <div id="paySuccess" class="form-success hidden"></div>
+      </div>
+      <form id="paymentForm" class="clinic-form">
+        <div class="form-row">
+          <label>Full Name *</label>
+          <input type="text" name="patientName" required />
+        </div>
+        <div class="form-row">
+          <label>Phone Number *</label>
+          <input type="tel" name="phoneNumber" required pattern="[0-9]{10}" placeholder="10-digit number" />
+        </div>
+        <div class="form-row form-row-split">
+          <div>
+            <label>Amount (₹) *</label>
+            <input type="number" name="amount" min="1" step="1" required />
+          </div>
+          <div>
+            <label>Payment Mode *</label>
+            <select name="paymentMode" required>
+              <option value="">Select</option>
+              <option value="UPI">UPI</option>
+              <option value="CARD">Debit / Credit Card</option>
+              <option value="NET_BANKING">Net Banking</option>
+              <option value="CASH">Cash at Clinic</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Payment For</label>
+          <input type="text" name="paymentPurpose" placeholder="e.g. Consultation Fee - Back Pain" />
+        </div>
+        <button type="submit" class="btn btn-primary">Pay / Record Payment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact-section">
+    <div class="section-inner form-grid">
+      <div>
+        <p class="eyebrow">Get In Touch</p>
+        <h2>Contact Us</h2>
+        <p><strong>Address</strong><br/>Shop No. 4, Green Valley Complex,<br/>Near City Hospital Road, Ranchi, Jharkhand – 834001</p>
+        <p><strong>Phone</strong><br/>+91 98XXX-XXXXX</p>
+        <p><strong>Email</strong><br/>care@drsanjitkumarclinic.in</p>
+        <p><strong>Hours</strong><br/>Mon – Sat: 9:00 AM – 8:00 PM<br/>Sunday: By appointment only</p>
+        <div id="contactSuccess" class="form-success hidden">Thank you! We've received your message and will contact you soon.</div>
+      </div>
+      <form id="contactForm" class="clinic-form">
+        <div class="form-row">
+          <label>Full Name *</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="form-row">
+          <label>Phone Number *</label>
+          <input type="tel" name="phoneNumber" required pattern="[0-9]{10}" placeholder="10-digit number" />
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" name="email" />
+        </div>
+        <div class="form-row">
+          <label>Message *</label>
+          <textarea name="message" rows="4" required placeholder="How can we help you?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Dr. Sanjit Kumar Physiotherapy Clinic. All rights reserved.</p>
+    <p class="footer-note">This website provides general information and does not replace an in-person medical consultation.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

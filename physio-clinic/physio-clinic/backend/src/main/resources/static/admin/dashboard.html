@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard — Dr. Sanjit Kumar Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest-deep: #163C2E; --forest-mid: #2F6B4F; --forest-soft: #E9F2EC;
+    --cream: #FBFAF6; --white: #fff; --gold: #B98A2E; --line: #D8E3DB; --charcoal: #22281F;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--charcoal); margin: 0; }
+  header { background: var(--forest-deep); color: #fff; padding: 1.2rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin: 0; }
+  main { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+  .login-box { max-width: 380px; margin: 4rem auto; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 2rem; text-align: center; }
+  .login-box input { width: 100%; padding: 0.7rem; margin: 1rem 0; border: 1px solid var(--line); border-radius: 6px; }
+  .login-box button, .tab-btn { background: var(--forest-mid); color: #fff; border: none; padding: 0.7rem 1.4rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .summary-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem; text-align: center; }
+  .summary-card span { display:block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--forest-deep); font-weight: 700; }
+  .summary-card label { font-size: 0.75rem; text-transform: uppercase; color: #666; }
+  .tabs { display: flex; gap: 0.6rem; margin-bottom: 1rem; }
+  .tab-btn { background: var(--forest-soft); color: var(--forest-deep); }
+  .tab-btn.active { background: var(--forest-mid); color: #fff; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); }
+  th, td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); font-size: 0.85rem; text-align: left; }
+  th { background: var(--forest-soft); color: var(--forest-deep); }
+  .hidden { display: none; }
+  .error-text { color: #b23; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Dr. Sanjit Kumar Clinic — Admin Dashboard</h1>
+  <button id="logoutBtn" class="hidden" style="background:transparent;border:1px solid #fff;color:#fff;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;">Log out</button>
+</header>
+
+<div id="loginBox" class="login-box">
+  <h3>Enter Admin Key</h3>
+  <p style="font-size:0.85rem;color:#666;">Set via the <code>ADMIN_KEY</code> environment variable on your server.</p>
+  <input type="password" id="adminKeyInput" placeholder="Admin key" />
+  <button id="loginBtn">View Dashboard</button>
+  <p id="loginError" class="error-text hidden">Invalid admin key.</p>
+</div>
+
+<main id="dashboardMain" class="hidden">
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="appointments">Appointments</button>
+    <button class="tab-btn" data-tab="payments">Payments</button>
+    <button class="tab-btn" data-tab="messages">Contact Messages</button>
+  </div>
+
+  <div id="tabContent"></div>
+</main>
+
+<script>
+  const API_BASE = "";
+  let adminKey = "";
+
+  document.getElementById("loginBtn").addEventListener("click", login);
+  document.getElementById("adminKeyInput").addEventListener("keydown", e => { if (e.key === "Enter") login(); });
+  document.getElementById("logoutBtn").addEventListener("click", () => location.reload());
+
+  async function login() {
+    adminKey = document.getElementById("adminKeyInput").value.trim();
+    if (!adminKey) return;
+    const res = await fetch(`${API_BASE}/api/admin/summary`, { headers: { "X-Admin-Key": adminKey } });
+    if (!res.ok) {
+      document.getElementById("loginError").classList.remove("hidden");
+      return;
+    }
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("dashboardMain").classList.remove("hidden");
+    document.getElementById("logoutBtn").classList.remove("hidden");
+
+    const summary = await res.json();
+    renderSummary(summary);
+    loadTab("appointments");
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadTab(btn.dataset.tab);
+      });
+    });
+  }
+
+  function renderSummary(s) {
+    document.getElementById("summaryGrid").innerHTML = `
+      <div class="summary-card"><span>${s.totalAppointments}</span><label>Appointments</label></div>
+      <div class="summary-card"><span>${s.totalPayments}</span><label>Payments</label></div>
+      <div class="summary-card"><span>₹${s.totalRevenue}</span><label>Total Revenue</label></div>
+      <div class="summary-card"><span>${s.totalMessages}</span><label>Messages</label></div>
+    `;
+  }
+
+  async function loadTab(tab) {
+    const content = document.getElementById("tabContent");
+    content.innerHTML = "<p>Loading…</p>";
+    const res = await fetch(`${API_BASE}/api/admin/${tab}`, { headers: { "X-Admin-Key": adminKey } });
+    const data = await res.json();
+
+    if (tab === "appointments") {
+      content.innerHTML = renderTable(data, [
+        ["patientName","Name"], ["phoneNumber","Phone"], ["relatedCondition","Condition"],
+        ["preferredDate","Date"], ["preferredTime","Time"], ["status","Status"], ["createdAt","Booked At"]
+      ]);
+    } else if (tab === "payments") {
+      content.innerHTML = renderTable(data, [
+        ["patientName","Name"], ["phoneNumber","Phone"], ["amount","Amount (₹)"],
+        ["paymentPurpose","Purpose"], ["paymentMode","Mode"], ["transactionRef","Ref"],
+        ["status","Status"], ["createdAt","Date"]
+      ]);
+    } else {
+      content.innerHTML = renderTable(data, [
+        ["name","Name"], ["phoneNumber","Phone"], ["email","Email"], ["message","Message"], ["createdAt","Received At"]
+      ]);
+    }
+  }
+
+  function renderTable(rows, columns) {
+    if (!rows.length) return "<p>No records yet.</p>";
+    const head = columns.map(c => `<th>${c[1]}</th>`).join("");
+    const body = rows.map(r => `<tr>${columns.map(c => `<td>${r[c[0]] ?? "-"}</td>`).join("")}</tr>`).join("");
+    return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+  }
+</script>
+
+</body>
+</html>

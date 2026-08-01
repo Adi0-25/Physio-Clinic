@@ -1,0 +1,446 @@
+/* ==========================================================
+   Dr. Sanjit Kumar Physiotherapy Clinic — Design tokens
+   Palette: classic clinical green + white, warm gold accent
+   ========================================================== */
+:root {
+  --forest-deep: #163C2E;
+  --forest-mid: #2F6B4F;
+  --forest-mid-hover: #255A41;
+  --forest-soft: #E9F2EC;
+  --cream: #FBFAF6;
+  --white: #FFFFFF;
+  --gold: #B98A2E;
+  --gold-soft: #E7D7B1;
+  --charcoal: #22281F;
+  --charcoal-soft: #4B564D;
+  --line: #D8E3DB;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+
+  --radius: 6px;
+  --shadow-soft: 0 10px 30px rgba(22, 60, 46, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background: var(--cream);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--forest-deep);
+  margin: 0 0 0.4em 0;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+h2 { font-size: 2.3rem; }
+h3 { font-size: 1.5rem; }
+
+p { margin: 0 0 1em 0; color: var(--charcoal-soft); }
+
+a { color: var(--forest-mid); text-decoration: none; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 0 0 0.6em 0;
+}
+
+.section { padding: 5rem 1.5rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-note { max-width: 640px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--forest-mid);
+  color: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+.btn-primary:hover { background: var(--forest-mid-hover); }
+
+.btn-enter {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.7);
+  padding: 0.9rem 2.4rem;
+}
+.btn-enter:hover { background: rgba(255,255,255,0.12); }
+
+/* ==========================================================
+   LANDING PAGE
+   ========================================================== */
+.landing-body { margin: 0; }
+
+.landing-hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background-image:
+    linear-gradient(180deg, rgba(12, 32, 24, 0.78) 0%, rgba(12, 32, 24, 0.88) 55%, rgba(12, 32, 24, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+}
+
+.landing-content {
+  max-width: 640px;
+  z-index: 2;
+}
+
+.stetho-mark { margin: 0.5rem auto 1rem; width: 140px; opacity: 0.9; }
+.stetho-mark svg {
+  width: 100%;
+  fill: none;
+  stroke: var(--gold-soft);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.landing-content .eyebrow { color: var(--gold-soft); }
+
+.clinic-name {
+  font-size: 3.4rem;
+  color: var(--white);
+  margin-bottom: 0.15em;
+}
+
+.clinic-tagline {
+  font-family: var(--font-body);
+  color: var(--gold-soft);
+  letter-spacing: 0.5px;
+  font-size: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.clinic-intro {
+  color: rgba(255,255,255,0.88);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.landing-address {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(255,255,255,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  padding: 1.1rem 0;
+  margin-bottom: 2.2rem;
+}
+.landing-address .pin { color: var(--gold-soft); margin-right: 0.4rem; }
+.landing-phone { display: inline-block; margin-top: 0.4rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 1.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  z-index: 2;
+}
+
+/* ==========================================================
+   SITE HEADER / NAV (interior pages)
+   ========================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--forest-deep);
+}
+.brand em { font-style: normal; font-weight: 500; color: var(--forest-mid); font-size: 1rem; }
+.brand-mark { color: var(--gold); }
+
+.site-nav { display: flex; gap: 1.6rem; }
+.site-nav a {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--charcoal-soft);
+}
+.site-nav a:hover { color: var(--forest-mid); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--forest-deep);
+  cursor: pointer;
+}
+
+/* ==========================================================
+   ABOUT
+   ========================================================== */
+.about-section { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: start; }
+.about-points { padding-left: 1.2rem; color: var(--charcoal-soft); }
+.about-points li { margin-bottom: 0.5rem; }
+
+.about-card {
+  background: var(--forest-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.about-card h3 { margin-bottom: 0.2rem; }
+.about-card-role { color: var(--gold); font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+.about-card hr { border: none; border-top: 1px solid var(--line); margin: 1.2rem 0; }
+.about-card p { font-size: 0.92rem; margin-bottom: 1rem; }
+
+/* ==========================================================
+   FACILITIES
+   ========================================================== */
+.facilities-section { background: var(--forest-soft); }
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin-top: 2rem;
+}
+.facility-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.3rem;
+  text-align: left;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.facility-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-3px); }
+.facility-icon { font-size: 1.6rem; display: block; margin-bottom: 0.6rem; color: var(--gold); }
+.facility-card h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.facility-card p { font-size: 0.88rem; margin: 0; }
+
+/* ==========================================================
+   CONDITIONS
+   ========================================================== */
+.conditions-section { background: var(--white); }
+.condition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.loading-text { color: var(--charcoal-soft); font-style: italic; }
+
+.condition-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  cursor: pointer;
+  background: var(--cream);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.condition-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-3px); border-color: var(--forest-mid); }
+.condition-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.condition-card p { font-size: 0.85rem; margin-bottom: 0.6rem; }
+.condition-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: var(--forest-soft);
+  color: var(--forest-mid);
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 38, 30, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 560px;
+  width: 100%;
+  padding: 2.2rem;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--charcoal-soft);
+}
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin: 1.4rem 0;
+  padding: 1rem;
+  background: var(--forest-soft);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.modal-stats span { display: block; font-family: var(--font-display); font-size: 1.3rem; color: var(--forest-deep); font-weight: 600; }
+.modal-stats label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--charcoal-soft); }
+
+/* ==========================================================
+   FORMS (Book / Fees / Contact)
+   ========================================================== */
+.book-section { background: var(--forest-soft); }
+.fees-section { background: var(--white); }
+.contact-section { background: var(--forest-soft); }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+
+.clinic-form {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+.form-row { margin-bottom: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.form-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+.form-row-split > div { display: flex; flex-direction: column; gap: 0.35rem; }
+
+label { font-size: 0.85rem; font-weight: 600; color: var(--forest-deep); }
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--charcoal);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--forest-mid);
+  outline-offset: 1px;
+}
+
+.clinic-form .btn-primary { width: 100%; margin-top: 0.5rem; }
+
+.form-success {
+  background: var(--forest-mid);
+  color: var(--white);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.form-success.hidden { display: none; }
+
+.fees-table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; }
+.fees-table th, .fees-table td {
+  text-align: left;
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.fees-table th { color: var(--forest-deep); font-family: var(--font-display); font-size: 1rem; }
+.fees-note { font-size: 0.85rem; color: var(--charcoal-soft); }
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.site-footer {
+  background: var(--forest-deep);
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: 0.85rem;
+}
+.site-footer p { color: rgba(255,255,255,0.75); margin: 0.2em 0; }
+.footer-note { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 900px) {
+  .about-grid, .form-grid { grid-template-columns: 1fr; }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .condition-grid { grid-template-columns: repeat(2, 1fr); }
+  .site-nav { display: none; }
+  .nav-toggle { display: block; }
+  .site-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .clinic-name { font-size: 2.4rem; }
+}
+
+@media (max-width: 560px) {
+  .facility-grid, .condition-grid { grid-template-columns: 1fr; }
+  .form-row-split { grid-template-columns: 1fr; }
+  .modal-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .facility-card, .condition-card { transition: none; }
+}
