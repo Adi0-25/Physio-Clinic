@@ -1,4 +1,4 @@
-# Dr. Sanjit Kumar — Physiotherapy Clinic Website
+ Physiotherapy Clinic Website
 
 A full-stack clinic website: a classic green-and-white landing page, an
 interior site with facilities, a searchable list of physiotherapy
@@ -141,7 +141,7 @@ jdbc:mysql://<HOST>:<PORT>/<DATABASE>?useSSL=true&serverTimezone=UTC&allowPublic
 
 ---
 
-## 6. API reference (for your own understanding)
+## 6. API reference 
 
 | Method | Endpoint | Purpose |
 |---|---|---|
